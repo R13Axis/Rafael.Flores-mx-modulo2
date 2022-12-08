@@ -10,6 +10,8 @@ class Game:
         pygame.display.set_caption(TITLE)
         pygame.display.set_icon(ICON)
         self.screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
+        self.center_width = SCREEN_WIDTH // 2
+        self.center_height = SCREEN_HEIGHT // 2
         self.clock = pygame.time.Clock()
         self.playing = False
         self.game_speed = 20
@@ -75,11 +77,8 @@ class Game:
         self.x_pos_bg -= self.game_speed
 
     def draw_score(self):
-        font = pygame.font.Font(FONT_STYLE, 30)
-        text = font.render(f'Score: {self.score}', True, (0,0,0) ) 
-        text_rect = text.get_rect()
-        text_rect.center = (100, 50)
-        self.screen.blit(text, text_rect)
+        my_score = f'Score: {self.score}'
+        self.display_message(my_score, 100, 50, 1)
 
     def handle_events_on_menu(self):
         for event in pygame.event.get():
@@ -89,25 +88,32 @@ class Game:
             elif event.type == pygame.KEYDOWN:
                 self.run()
 
-    def display_message(self, item, width, height):
-            width = SCREEN_HEIGHT // 2
-            height = SCREEN_WIDTH // 2
-            self.screen.fill((255, 255, 255))
-            font = pygame.font.Font(FONT_STYLE, 30)
-            text = font.render(item, True, (0,0,0))
-            text_rect = text.get_rect()
-            text_rect.center = (half_screen_width, half_screen_height)
-            self.screen.blit(text, text_rect)
+    def display_message(self, item, width, height, background):
+            if background == 0:
+                self.screen.fill((255, 255, 255))
+                font = pygame.font.Font(FONT_STYLE, 30)
+                text = font.render(item, True, (0,0,0))
+                text_rect = text.get_rect()
+                text_rect.center = (width, height)
+                self.screen.blit(text, text_rect)
+            else:
+                font = pygame.font.Font(FONT_STYLE, 30)
+                text = font.render(item, True, (0,0,0))
+                text_rect = text.get_rect()
+                text_rect.center = (width, height)
+                self.screen.blit(text, text_rect)
+            
 
     def show_menu(self):
         print(self.death_count)
         menu_str = "Press any key to start"
         if self.death_count == 0:
-            self.display_message(menu_str)
+            self.display_message(menu_str, self.center_width, self.center_height, 0)
             
         else:
-            pass
+            self.display_message("You have died", self.center_width, self.center_height - 40, 0)
+            self.display_message("Want to play again? ", self.center_width, self.center_height + 10, 1)
 
-        self.screen.blit(ICON, (half_screen_width - 20, half_screen_height - 140))
+
         pygame.display.update()
         self.handle_events_on_menu()

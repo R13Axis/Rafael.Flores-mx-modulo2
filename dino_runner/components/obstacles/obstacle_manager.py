@@ -32,5 +32,5 @@ class ObstacleManager:
             obstacle.draw(screen)
 
     def reset_obstacles(self):
-        self.reset_obstacles = []
+        self.obstacles = []
     
