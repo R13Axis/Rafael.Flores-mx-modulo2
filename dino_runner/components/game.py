@@ -52,6 +52,8 @@ class Game:
 
     def update_score(self):
         self.score +=1
+        if self.score % 100 == 0:
+            self.game_speed += 5
 
     def draw(self):
         self.clock.tick(FPS)
@@ -74,7 +76,7 @@ class Game:
 
     def draw_score(self):
         font = pygame.font.Font(FONT_STYLE, 30)
-        text = font.render(f'score: {self.score}', True, (0,0,0) ) 
+        text = font.render(f'Score: {self.score}', True, (0,0,0) ) 
         text_rect = text.get_rect()
         text_rect.center = (100, 50)
         self.screen.blit(text, text_rect)
@@ -87,20 +89,25 @@ class Game:
             elif event.type == pygame.KEYDOWN:
                 self.run()
 
-    def show_menu(self):
-        print(self.death_count)
-        self.screen.fill((255, 255, 255))
-        half_screen_height = SCREEN_HEIGHT // 2
-        half_screen_width = SCREEN_WIDTH // 2
-        if self.death_count == 0:
+    def display_message(self, item, width, height):
+            width = SCREEN_HEIGHT // 2
+            height = SCREEN_WIDTH // 2
+            self.screen.fill((255, 255, 255))
             font = pygame.font.Font(FONT_STYLE, 30)
-            text = font.render('Press any key to start', True, (0,0,0))
+            text = font.render(item, True, (0,0,0))
             text_rect = text.get_rect()
             text_rect.center = (half_screen_width, half_screen_height)
             self.screen.blit(text, text_rect)
+
+    def show_menu(self):
+        print(self.death_count)
+        menu_str = "Press any key to start"
+        if self.death_count == 0:
+            self.display_message(menu_str)
             
         else:
             pass
+
         self.screen.blit(ICON, (half_screen_width - 20, half_screen_height - 140))
         pygame.display.update()
         self.handle_events_on_menu()
