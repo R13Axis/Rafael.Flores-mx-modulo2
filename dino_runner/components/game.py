@@ -62,6 +62,7 @@ class Game:
         self.screen.fill((255, 255, 255))
         self.draw_background()
         self.draw_score()
+        self.draw_death_count()
         self.player.draw(self.screen)
         self.obstacle_manager.draw(self.screen)
         pygame.display.update()
@@ -76,9 +77,16 @@ class Game:
             self.x_pos_bg = 0
         self.x_pos_bg -= self.game_speed
 
+    def draw_death_count(self):
+        self.display_message(f'Deaths: {self.death_count}', 100, 50, 1)
+
     def draw_score(self):
         my_score = f'Score: {self.score}'
-        self.display_message(my_score, 100, 50, 1)
+        self.display_message(my_score, 1000, 50, 1)
+    
+    def reset_score(self):
+        self.score = 0
+        self.game_speed = 20
 
     def handle_events_on_menu(self):
         for event in pygame.event.get():

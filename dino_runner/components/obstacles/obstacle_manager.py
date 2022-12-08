@@ -25,6 +25,8 @@ class ObstacleManager:
                 pygame.time.delay(1000)
                 game.playing = False
                 game.death_count += 1
+                game.reset_score()
+                game.draw_death_count()
                 break
 
     def draw(self, screen):
