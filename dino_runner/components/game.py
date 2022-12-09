@@ -48,6 +48,9 @@ class Game:
             if event.type == pygame.QUIT:
                 self.playing = False
 
+            elif event.type == pygame.K_RCTRL:
+                self.screen.fill((0, 0, 0))
+
     def update(self):
         self.update_score()
         user_input = pygame.key.get_pressed()
@@ -62,7 +65,7 @@ class Game:
 
     def draw(self):
         self.clock.tick(FPS)
-        self.screen.fill((255, 255, 255))
+        self.screen.fill((98, 98, 98))
         self.draw_background()
         self.draw_score()
         self.draw_power_up_time()
@@ -113,15 +116,15 @@ class Game:
 
     def display_message(self, item, width, height, background):
             if background == 0:
-                self.screen.fill((255, 255, 255))
+                self.screen.fill((98, 98, 98))
                 font = pygame.font.Font(FONT_STYLE, 30)
-                text = font.render(item, True, (0,0,0))
+                text = font.render(item, True, (255,255,255))
                 text_rect = text.get_rect()
                 text_rect.center = (width, height)
                 self.screen.blit(text, text_rect)
             else:
                 font = pygame.font.Font(FONT_STYLE, 30)
-                text = font.render(item, True, (0,0,0))
+                text = font.render(item, True, (255,255,255))
                 text_rect = text.get_rect()
                 text_rect.center = (width, height)
                 self.screen.blit(text, text_rect)
@@ -135,7 +138,6 @@ class Game:
         else:
             self.display_message("You have died", self.center_width, self.center_height - 40, 0)
             self.display_message("Press any key to play again", self.center_width, self.center_height + 10, 1)
-
 
         pygame.display.update()
         self.handle_events_on_menu()
