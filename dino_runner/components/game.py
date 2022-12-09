@@ -65,7 +65,7 @@ class Game:
 
     def draw(self):
         self.clock.tick(FPS)
-        self.screen.fill((98, 98, 98))
+        self.screen.fill((40, 40, 40))
         self.draw_background()
         self.draw_score()
         self.draw_power_up_time()
@@ -116,7 +116,7 @@ class Game:
 
     def display_message(self, item, width, height, background):
             if background == 0:
-                self.screen.fill((98, 98, 98))
+                self.screen.fill((40, 40, 40))
                 font = pygame.font.Font(FONT_STYLE, 30)
                 text = font.render(item, True, (255,255,255))
                 text_rect = text.get_rect()
