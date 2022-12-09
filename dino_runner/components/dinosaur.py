@@ -19,7 +19,7 @@ class Dinosaur:
         self.dino_duck = False
         self.jump_vel = 8.5
         self.has_power_up = False
-        self.power_tie_up = 0
+        self.power_time_up = 0
     
     def update(self, user_input):
         
@@ -54,7 +54,7 @@ class Dinosaur:
             self.step_index = 0
 
     def jump(self):
-        self.image = JUMP_IMG[self.type][0]
+        self.image = JUMP_IMG[self.type]
         self.dino_rect.y -= self.jump_vel * 4
         self.jump_vel -= 0.8
         
@@ -64,13 +64,13 @@ class Dinosaur:
             self.jump_vel = 8.5
         
     def run(self):
-        self.image = RUN_IMG[self.type][0][self.step_index // 5]
+        self.image = RUN_IMG[self.type][self.step_index // 5]
         self.dino_rect.x = 80
         self.dino_rect.y = 310
         self.step_index += 1
     
     def duck(self):
-        self.image = DUCK_IMG[self.type][0][self.step_index // 5]
+        self.image = DUCK_IMG[self.type][self.step_index // 5]
         self.dino_rect.x = 80
         self.dino_rect.y = 340
         self.step_index +=1

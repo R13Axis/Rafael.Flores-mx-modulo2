@@ -20,7 +20,7 @@ class Game:
         self.y_pos_bg = 380
         self.player = Dinosaur()
         self.obstacle_manager = ObstacleManager()
-        self.power_up_manager = PowerUpManager
+        self.power_up_manager = PowerUpManager()
         self.running = True
         self.score = 0
         self.death_count = 0
@@ -65,6 +65,7 @@ class Game:
         self.screen.fill((255, 255, 255))
         self.draw_background()
         self.draw_score()
+        self.draw_power_up_time()
         self.draw_death_count()
         self.player.draw(self.screen)
         self.obstacle_manager.draw(self.screen)
@@ -85,13 +86,7 @@ class Game:
         if self.player.has_power_up:
             time_to_show = round((self.player.power_time_up - pygame.time.get_ticks())/ 1000, 2)
             if time_to_show >= 0:
-                draw_message(
-                    f'{self.player.type.capitalize()} enable for {time_to_show} seconds',
-                    self.screen,
-                    font_size = 18,
-                    pos_x_center = 500,
-                    pos_y_center = 40
-                )
+                self.display_message(f'{self.player.type.capitalize()} enable for {time_to_show} seconds', 550, 50, 1)
             else:
                 self.has_power_up = False
                 self.player.type = DEFAULT_TYPE
@@ -132,7 +127,6 @@ class Game:
             
 
     def show_menu(self):
-        print(self.death_count)
         menu_str = "Press any key to start"
         if self.death_count == 0:
             self.display_message(menu_str, self.center_width, self.center_height, 0)
