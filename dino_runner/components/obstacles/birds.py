@@ -6,3 +6,5 @@ class Bird(Obstacles):
         self.type = random.randint(0, 1)
         super().__init__(image, self.type)
         self.rect.y = 270
+
+    
