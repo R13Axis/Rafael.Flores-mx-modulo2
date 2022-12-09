@@ -23,6 +23,8 @@ class PowerUpManager:
                 game.player.type = power_up.type
                 game.player.power_time_up = power_up.start_time + (self.duration * 1000)
                 self.power_ups.remove(power_up)
+                pygame.mixer.music.load("dino_runner/assets/sounds/BGM_ITM_STAR_STATE_EN.wav")
+                pygame.mixer.music.play()
     
     def draw(self, screen):
         for power_up in self.power_ups:

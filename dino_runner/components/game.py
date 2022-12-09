@@ -90,6 +90,7 @@ class Game:
             else:
                 self.has_power_up = False
                 self.player.type = DEFAULT_TYPE
+                pygame.mixer.music.stop()
 
     def draw_death_count(self):
         self.display_message(f'Deaths: {self.death_count}', 100, 50, 1)
@@ -133,8 +134,10 @@ class Game:
             
         else:
             self.display_message("You have died", self.center_width, self.center_height - 40, 0)
-            self.display_message("Want to play again? ", self.center_width, self.center_height + 10, 1)
+            self.display_message("Press any key to play again", self.center_width, self.center_height + 10, 1)
 
 
         pygame.display.update()
         self.handle_events_on_menu()
+
+    

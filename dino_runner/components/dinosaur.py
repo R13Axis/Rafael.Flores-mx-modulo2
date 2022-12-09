@@ -20,6 +20,7 @@ class Dinosaur:
         self.jump_vel = 8.5
         self.has_power_up = False
         self.power_time_up = 0
+        self.jump_sound = pygame.mixer.Sound("dino_runner/assets/sounds/audiomass-output.mp3")
     
     def update(self, user_input):
         
@@ -34,6 +35,7 @@ class Dinosaur:
             self.dino_jump = True
             self.dino_run = False
             self.dino_duck = True
+            self.jump_sound.play()
             
         elif not self.dino_jump:
             self.dino_jump = False
